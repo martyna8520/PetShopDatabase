@@ -32,11 +32,12 @@ CREATE TABLE Delivery_options (
 );
 
 CREATE TABLE Customers (
-    customer_id INT PRIMARY KEY,
+    -- customer_id INT PRIMARY KEY,
     customer_name VARCHAR(30) CHECK (customer_name NOT LIKE '%[^A-Za-z]%' AND LEFT(customer_name, 1) = UPPER(LEFT(customer_name, 1))) NOT NULL,
     customer_surname VARCHAR(30) CHECK (customer_surname NOT LIKE '%[^A-Za-z]%' AND LEFT(customer_surname, 1) = UPPER(LEFT(customer_surname, 1))) NOT NULL,
     e_mail VARCHAR(255) NOT NULL CHECK (e_mail LIKE '%@%.pl' OR e_mail LIKE '%@%.com'),
-    phone_number CHAR(9) UNIQUE CHECK(phone_number  LIKE'[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
+    phone_number CHAR(9) UNIQUE CHECK(phone_number  LIKE'[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+    PRIMARY KEY (customer_name, customer_surname)
 );
 
 CREATE TABLE Addresses (
@@ -45,8 +46,11 @@ CREATE TABLE Addresses (
     city VARCHAR(20),
     postal_code VARCHAR(10) NOT NULL CHECK( postal_code LIKE '[0-9][0-9]-[0-9][0-9][0-9]'),
     house_number VARCHAR(10) NOT NULL, 
-    customer_id INT,
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+    customer_name VARCHAR(30) NOT NULL,
+    customer_surname VARCHAR(30)NOT NULL,
+    FOREIGN KEY (customer_name, customer_surname) REFERENCES Customers(customer_name, customer_surname)
+    -- customer_id INT,
+    -- FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
 CREATE TABLE Orders (
@@ -54,10 +58,13 @@ CREATE TABLE Orders (
     order_date DATE NOT NULL CHECK (order_date >= '2021-12-01'),
     order_status VARCHAR(255) NOT NULL,
     order_price DECIMAL(8, 2) NOT NULL,
-    customer_id INT,
+    -- customer_id INT,
     delivery_option_id INT,
     address_id INT,
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    -- FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    customer_name VARCHAR(30) NOT NULL,
+    customer_surname VARCHAR(30)NOT NULL,
+    FOREIGN KEY (customer_name, customer_surname) REFERENCES Customers(customer_name, customer_surname),
     FOREIGN KEY (delivery_option_id) REFERENCES Delivery_options(delivery_option_id),
     FOREIGN KEY (address_id) REFERENCES Addresses(address_id),
 );
@@ -75,7 +82,7 @@ CREATE TABLE Employees (
     employee_id INT PRIMARY KEY,
     employee_name VARCHAR(50) NOT NULL CHECK (employee_name NOT LIKE '%[^A-Za-z]%' AND LEFT(employee_name, 1) = UPPER(LEFT(employee_name, 1))),
     employee_surname VARCHAR(50) NOT NULL CHECK (employee_surname NOT LIKE '%[^A-Za-z]%' AND LEFT(employee_surname, 1) = UPPER(LEFT(employee_surname, 1))),
-    position VARCHAR(50) NOT NULL
+    position VARCHAR(50) NOT NULL CHECK (position IN ('Cashier', 'Warehouseman', 'Manager')) 
 );
 
 CREATE TABLE Packages (
@@ -106,12 +113,16 @@ CREATE TABLE Deliveries (
 );
 
 CREATE TABLE Reviews (
+    review_id INT PRIMARY KEY,
     comment VARCHAR(255),
     rating INT CHECK (rating >= 1 AND rating <= 5) NOT NULL,
     product_id INT,
-    customer_id INT,
+    -- customer_id INT,
+    customer_name VARCHAR(30) NOT NULL,
+    customer_surname VARCHAR(30)NOT NULL,
     FOREIGN KEY (product_id) REFERENCES Products(product_id),
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+    FOREIGN KEY (customer_name, customer_surname) REFERENCES Customers(customer_name, customer_surname)
+    -- FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
 CREATE TABLE Transactions (
