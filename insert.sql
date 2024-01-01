@@ -214,18 +214,18 @@ VALUES
 (9, 'Delivered', '2023-05-26', 11),
 (10, 'Delivered', '2023-08-22', 12);
 
-INSERT INTO Reviews (review_id, comment, rating, product_id, customer_name, customer_surname)
+INSERT INTO Reviews (comment, rating, product_id, customer_name, customer_surname)
 VALUES
-(1, 'Great product!', 5, 5, 'Gaja', 'Pesta'),
-(2, 'Not satisfied.', 2, 12, 'Agnieszka', 'Gomula'),
-(3, 'Amazing quality!', 5, 20, 'Franciszek', 'Bas'),
-(4, 'Could be better.', 3, 3, 'Jedrzej', 'Drozdziel'),
-(5, 'Fast delivery!', NULL, 17, 'Antoni', 'Szwaj'),
-(6, NULL, 5, 9, 'Tobiasz', 'Piotrkowicz'),
-(7, 'Product as described.', 4, 6, 'Elzbieta', 'Prokopczuk'),
-(8, NULL, 4, 16, 'Apolonia', 'Komsta'),
-(9, 'Satisfied with the purchase.', NULL, 7, 'Jakub', 'Grunt'),
-(10, 'Excellent customer service!', 5, 11, 'Natasza', 'Kiciak');
+('Great product!', 5, 5, 'Gaja', 'Pesta'),
+('Not satisfied.', 2, 12, 'Agnieszka', 'Gomula'),
+('Amazing quality!', 5, 20, 'Franciszek', 'Bas'),
+('Could be better.', 3, 3, 'Jedrzej', 'Drozdziel'),
+('Fast delivery!', NULL, 17, 'Antoni', 'Szwaj'),
+( NULL, 5, 9, 'Tobiasz', 'Piotrkowicz'),
+('Product as described.', 4, 6, 'Elzbieta', 'Prokopczuk'),
+(NULL, 4, 16, 'Apolonia', 'Komsta'),
+('Satisfied with the purchase.', NULL, 7, 'Jakub', 'Grunt'),
+('Excellent customer service!', 5, 11, 'Natasza', 'Kiciak');
 
 INSERT INTO Transactions (transaction_id, total_price, payment_method, order_id)
 VALUES
