@@ -171,21 +171,6 @@ VALUES
 (9, 'Marek', 'Nowicki', 'Warehouseman'),
 (10, 'Monika', 'Kowalczyk', 'Cashier');
 
-INSERT INTO Package_parts (package_part_id, shipped_date, amount_id, package_id)
-VALUES
-(1, '2022-01-05', 1, 1),
-(2, '2022-03-15', 3, 2),
-(3, '2022-05-25', 5, 3),
-(4, '2022-07-05', 7, 4),
-(5, '2022-08-10', 8, 5),
-(6, '2022-09-15', 9, 6),
-(7, '2022-10-20', 10, 7),
-(8, '2023-01-05', 13, 8),
-(9, '2023-03-15', 15, 9),
-(10, '2023-04-20', 16, 10),
-(11, '2023-05-25', 17, 11),
-(12, '2023-08-20', 20, 12);
-
 INSERT INTO Packages (package_id, total_weight, package_status, order_id, employee_id)
 VALUES
 (1, 10.00, 'In packing', 1, 3),
@@ -200,6 +185,21 @@ VALUES
 (10, 0.75, 'Forwarded for shipment', 16, 3),
 (11, 1.20, 'Sent', 17, 4),
 (12, 1.00, 'Sent', 20, 9);
+
+INSERT INTO Package_parts (package_part_id, shipped_date, amount_id, package_id)
+VALUES
+(1, '2022-01-05', 1, 1),
+(2, '2022-03-15', 3, 2),
+(3, '2022-05-25', 5, 3),
+(4, '2022-07-05', 7, 4),
+(5, '2022-08-10', 8, 5),
+(6, '2022-09-15', 9, 6),
+(7, '2022-10-20', 10, 7),
+(8, '2023-01-05', 13, 8),
+(9, '2023-03-15', 15, 9),
+(10, '2023-04-20', 16, 10),
+(11, '2023-05-25', 17, 11),
+(12, '2023-08-20', 20, 12);
 
 INSERT INTO Deliveries (delivery_id, delivery_status, delivery_date, package_id)
 VALUES
