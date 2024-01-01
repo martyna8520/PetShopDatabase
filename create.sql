@@ -1,4 +1,4 @@
-USE pet_shop_database;
+CREATE DATABASE pet_shop_database;
 GO
 
 CREATE TABLE Producers (
@@ -22,7 +22,7 @@ CREATE TABLE Offers (
     date_to DATE NOT NULL CHECK (date_to >= '2021-12-01'),
     price DECIMAL(6, 2) NOT NULL,
     product_id INT NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+    FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Delivery_options (
@@ -32,7 +32,7 @@ CREATE TABLE Delivery_options (
 );
 
 CREATE TABLE Customers (
-    -- customer_id INT PRIMARY KEY,
+    -- customer_id INT NOT NULL PRIMARY KEY,
     customer_name VARCHAR(30) CHECK (customer_name NOT LIKE '%[^A-Za-z]%' AND LEFT(customer_name, 1) = UPPER(LEFT(customer_name, 1))) NOT NULL,
     customer_surname VARCHAR(30) CHECK (customer_surname NOT LIKE '%[^A-Za-z]%' AND LEFT(customer_surname, 1) = UPPER(LEFT(customer_surname, 1))) NOT NULL,
     e_mail VARCHAR(50) NOT NULL CHECK (e_mail LIKE '%@%.pl' OR e_mail LIKE '%@%.com'),
@@ -48,7 +48,7 @@ CREATE TABLE Addresses (
     house_number VARCHAR(10) NOT NULL, 
     customer_name VARCHAR(30) NOT NULL,
     customer_surname VARCHAR(30)NOT NULL,
-    FOREIGN KEY (customer_name, customer_surname) REFERENCES Customers(customer_name, customer_surname)
+    FOREIGN KEY (customer_name, customer_surname) REFERENCES Customers(customer_name, customer_surname) ON DELETE CASCADE ON UPDATE CASCADE
     -- customer_id INT,
     -- FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
@@ -60,13 +60,13 @@ CREATE TABLE Orders (
     order_price DECIMAL(6, 2) NOT NULL,
     delivery_option_id INT,
     address_id INT,
-      -- customer_id INT,
+    -- customer_id INT,
     -- FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
     customer_name VARCHAR(30) NOT NULL,
     customer_surname VARCHAR(30)NOT NULL,
     FOREIGN KEY (customer_name, customer_surname) REFERENCES Customers(customer_name, customer_surname),
     FOREIGN KEY (delivery_option_id) REFERENCES Delivery_options(delivery_option_id),
-    FOREIGN KEY (address_id) REFERENCES Addresses(address_id),
+    FOREIGN KEY (address_id) REFERENCES Addresses(address_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Products_ordered (
@@ -74,8 +74,8 @@ CREATE TABLE Products_ordered (
     amount INT NOT NULL CHECK (amount >= 0),
     offer_id INT,
     order_id INT,
-    FOREIGN KEY (offer_id) REFERENCES Offers(offer_id),
-    FOREIGN KEY (order_id) REFERENCES Orders(order_id)
+    FOREIGN KEY (offer_id) REFERENCES Offers(offer_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Employees (
@@ -91,8 +91,8 @@ CREATE TABLE Packages (
     package_status VARCHAR(50) NOT NULL CHECK (package_status IN ('In packing','Forwarded for shipment', 'Sent')),
     order_id INT,
     employee_id INT,
-    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id)
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id) 
 );
 
 CREATE TABLE Package_parts (
@@ -100,30 +100,29 @@ CREATE TABLE Package_parts (
     shipped_date DATE NOT NULL CHECK (shipped_date >= '2021-12-01'),
     amount_id INT,
     package_id INT,
-    FOREIGN KEY (amount_id) REFERENCES Products_ordered(amount_id),
+    FOREIGN KEY (amount_id) REFERENCES Products_ordered(amount_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (package_id) REFERENCES Packages(package_id)
 );
 
 CREATE TABLE Deliveries (
     delivery_id INT NOT NULL PRIMARY KEY,
-    delivery_status VARCHAR(30) NOT NULL CHECK (delivery_status IN ('During delivery', 'Delivered','Waiting to be picked up by the courier')),
+    delivery_status VARCHAR(50) NOT NULL CHECK (delivery_status IN ('During delivery', 'Delivered','Waiting to be picked up by the courier')),
     delivery_date DATE NOT NULL CHECK (delivery_date >= '2021-12-01'),
     package_id INT,
     FOREIGN KEY (package_id) REFERENCES Packages(package_id)
 );
 
 CREATE TABLE Reviews (
-    review_id INT NOT NULL PRIMARY KEY,
     comment VARCHAR(255),
     rating INT CHECK (rating >= 1 AND rating <= 5),
     product_id INT,
-    -- customer_id INT,
-    customer_name VARCHAR(30) NOT NULL,
-    customer_surname VARCHAR(30)NOT NULL,
+    customer_name VARCHAR(30),
+    customer_surname VARCHAR(30),
     FOREIGN KEY (product_id) REFERENCES Products(product_id),
-    FOREIGN KEY (customer_name, customer_surname) REFERENCES Customers(customer_name, customer_surname)
-    -- FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+    FOREIGN KEY (customer_name, customer_surname) REFERENCES Customers(customer_name, customer_surname),
+    PRIMARY KEY (product_id, customer_name, customer_surname)
 );
+
 
 CREATE TABLE Transactions (
     transaction_id INT NOT NULL PRIMARY KEY,
