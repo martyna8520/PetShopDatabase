@@ -95,7 +95,7 @@ CREATE TABLE Package_parts (
     shipped_date DATE NOT NULL CHECK (shipped_date >= '2021-12-01'),
     amount_id INT,
     package_id INT,
-    FOREIGN KEY (amount_id) REFERENCES Products_ordered(amount_id), 
+    FOREIGN KEY (amount_id) REFERENCES Products_ordered(amount_id)ON DELETE CASCADE ON UPDATE CASCADE, 
     FOREIGN KEY (package_id) REFERENCES Packages(package_id)
 );
 
