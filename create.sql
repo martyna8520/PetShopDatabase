@@ -27,30 +27,27 @@ CREATE TABLE Offers (
 
 CREATE TABLE Delivery_options (
     delivery_option_id INT NOT NULL PRIMARY KEY,
-    delivery_cost DECIMAL(6, 2) DEFAULT 0.00,
+    delivery_cost DECIMAL(6, 2) DEFAULT 9.00,
     delivery_type VARCHAR(30) NOT NULL 
 );
 
 CREATE TABLE Customers (
-    -- customer_id INT NOT NULL PRIMARY KEY,
     customer_name VARCHAR(30) CHECK (customer_name NOT LIKE '%[^A-Za-z]%' AND LEFT(customer_name, 1) = UPPER(LEFT(customer_name, 1))) NOT NULL,
     customer_surname VARCHAR(30) CHECK (customer_surname NOT LIKE '%[^A-Za-z]%' AND LEFT(customer_surname, 1) = UPPER(LEFT(customer_surname, 1))) NOT NULL,
-    e_mail VARCHAR(50) NOT NULL CHECK (e_mail LIKE '%@%.pl' OR e_mail LIKE '%@%.com'),
+    e_mail VARCHAR(50) UNIQUE NOT NULL CHECK (e_mail LIKE '%@%.pl' OR e_mail LIKE '%@%.com'),
     phone_number CHAR(9) UNIQUE CHECK(phone_number  LIKE'[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
-    PRIMARY KEY (customer_name, customer_surname)
+    PRIMARY KEY (customer_name, e_mail)
 );
 
 CREATE TABLE Addresses (
     address_id INT NOT NULL PRIMARY KEY,
     street VARCHAR(100),
-    city VARCHAR(20),
+    city VARCHAR(20) NOT NULL,
     postal_code VARCHAR(10) NOT NULL CHECK( postal_code LIKE '[0-9][0-9]-[0-9][0-9][0-9]'),
     house_number VARCHAR(10) NOT NULL, 
     customer_name VARCHAR(30) NOT NULL,
-    customer_surname VARCHAR(30)NOT NULL,
-    FOREIGN KEY (customer_name, customer_surname) REFERENCES Customers(customer_name, customer_surname) ON DELETE CASCADE ON UPDATE CASCADE
-    -- customer_id INT,
-    -- FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+    e_mail VARCHAR(50)UNIQUE NOT NULL,
+    FOREIGN KEY (customer_name, e_mail) REFERENCES Customers(customer_name, e_mail) 
 );
 
 CREATE TABLE Orders (
@@ -60,13 +57,11 @@ CREATE TABLE Orders (
     order_price DECIMAL(6, 2) NOT NULL,
     delivery_option_id INT,
     address_id INT,
-    -- customer_id INT,
-    -- FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
     customer_name VARCHAR(30) NOT NULL,
-    customer_surname VARCHAR(30)NOT NULL,
-    FOREIGN KEY (customer_name, customer_surname) REFERENCES Customers(customer_name, customer_surname),
+    e_mail VARCHAR(50)UNIQUE NOT NULL,
+    FOREIGN KEY (customer_name, e_mail) REFERENCES Customers(customer_name, e_mail),
     FOREIGN KEY (delivery_option_id) REFERENCES Delivery_options(delivery_option_id),
-    FOREIGN KEY (address_id) REFERENCES Addresses(address_id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (address_id) REFERENCES Addresses(address_id)
 );
 
 CREATE TABLE Products_ordered (
@@ -91,7 +86,7 @@ CREATE TABLE Packages (
     package_status VARCHAR(50) NOT NULL CHECK (package_status IN ('In packing','Forwarded for shipment', 'Sent')),
     order_id INT,
     employee_id INT,
-    FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (employee_id) REFERENCES Employees(employee_id) 
 );
 
@@ -100,7 +95,7 @@ CREATE TABLE Package_parts (
     shipped_date DATE NOT NULL CHECK (shipped_date >= '2021-12-01'),
     amount_id INT,
     package_id INT,
-    FOREIGN KEY (amount_id) REFERENCES Products_ordered(amount_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (amount_id) REFERENCES Products_ordered(amount_id), 
     FOREIGN KEY (package_id) REFERENCES Packages(package_id)
 );
 
@@ -113,14 +108,14 @@ CREATE TABLE Deliveries (
 );
 
 CREATE TABLE Reviews (
+    review_id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     comment VARCHAR(255),
     rating INT CHECK (rating >= 1 AND rating <= 5),
     product_id INT,
     customer_name VARCHAR(30),
-    customer_surname VARCHAR(30),
+    e_mail VARCHAR(50) UNIQUE NOT NULL,
     FOREIGN KEY (product_id) REFERENCES Products(product_id),
-    FOREIGN KEY (customer_name, customer_surname) REFERENCES Customers(customer_name, customer_surname),
-    PRIMARY KEY (product_id, customer_name, customer_surname)
+    FOREIGN KEY (customer_name, e_mail) REFERENCES Customers(customer_name, e_mail),
 );
 
 
