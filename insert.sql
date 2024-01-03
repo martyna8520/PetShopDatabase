@@ -62,10 +62,13 @@ INSERT INTO Delivery_options (delivery_option_id, delivery_cost, delivery_type) 
 (2, 12.00, 'Courier DPD cash'),
 (3, 10.00, 'Parcel locker card'),
 (4, 8.50, 'Parcel locker cash'),
-(5, 9.00, 'Courier DPD card payment'),
 (6, 14.00, 'Courier DHL cash'),
 (7, 12.50, 'DPD PickUp'),
 (8, 13.00, 'DHL PickUp');
+
+INSERT INTO Delivery_options (delivery_option_id, delivery_type) VALUES
+(5, 'Courier DPD card payment')
+
 
 INSERT INTO Customers (customer_name, customer_surname, e_mail, phone_number) VALUES
 ('Gaja', 'Pesta', 'gaja.pesta@example.com', '601894114'),
@@ -89,51 +92,51 @@ INSERT INTO Customers (customer_name, customer_surname, e_mail, phone_number) VA
 ('Ewelina', 'Bulak', 'ewelina.bulak@example.com', '666777888'),
 ('Dariusz', 'Maserak', 'dariusz.maserak@example.com', '111222333');
 
-INSERT INTO Addresses (address_id, street, city, postal_code, house_number, customer_name, customer_surname)
+INSERT INTO Addresses (address_id, street, city, postal_code, house_number, customer_name, e_mail)
 VALUES
-(1, 'Wczasowa', 'Swidnik', '45-688', '45', 'Gaja', 'Pesta'),
-(2, 'Kilinskiego', 'Kielce', '77-278', '71/67', 'Agnieszka', 'Gomula'),
-(3, 'Wspolna', 'Olkusz', '69-019', '299', 'Franciszek', 'Bas'),
-(4, 'Polna', 'Leszno', '61-255', '81/53', 'Jedrzej', 'Drozdziel'),
-(5, 'Parkowa', 'Nowy Dwor Mazowiecki', '52-161', '507', 'Antoni', 'Szwaj'),
-(6, 'Boleslawa Chrobrego', 'Lodz', '45-586', '755', 'Tobiasz', 'Piotrkowicz'),
-(7, 'Plater', 'Olawa', '29-601', '82', 'Elzbieta', 'Prokopczuk'),
-(8, 'Borkowa', 'Mikolow', '53-443', '61/97', 'Apolonia', 'Komsta'),
-(9, 'Rubinowa', 'Bedzin', '21-088', '70', 'Jakub', 'Grunt'),
-(10, 'Dluga', 'Warszawa', '00-001', '112', 'Natasza', 'Kiciak'),
-(11, 'Olszynska', 'Gdansk', '80-001', '29', 'Szymon', 'Ciepluch'),
-(12, 'Kwiatowa', 'Krakow', '30-002', '17', 'Karina', 'Subocz'),
-(13, 'Topolowa', 'Poznan', '60-003', '5', 'Tymoteusz', 'Buszkiewicz'),
-(14, 'Lesna', 'Wroclaw', '50-004', '8', 'Julita', 'Katana'),
-(15, 'Zielona', 'Szczecin', '70-005', '22', 'Tomasz', 'Barteczko'),
-(16, 'Biala', 'Katowice', '40-006', '11', 'Karol', 'Fornalik'),
-(17, 'Rozana', 'Bydgoszcz', '85-007', '14', 'Maksymilian', 'Potoczny'),
-(18, 'Akacjowa', 'Lublin', '20-008', '33', 'Norbert', 'Mijas'),
-(19, 'Slowianska', 'Bialystok', '15-009', '7', 'Ewelina', 'Bulak'),
-(20, 'Mickiewicza', 'Torun', '87-010', '21', 'Dariusz', 'Maserak');
+(1, 'Wczasowa', 'Swidnik', '45-688', '45', 'Gaja', 'gaja.pesta@example.com'),
+(2, 'Kilinskiego', 'Kielce', '77-278', '71/67', 'Agnieszka', 'agnieszka.gomula@example.com'),
+(3, 'Wspolna', 'Olkusz', '69-019', '299', 'Franciszek', 'franciszek.bas@example.com'),
+(4, 'Polna', 'Leszno', '61-255', '81/53', 'Jedrzej', 'jedrzej.drozdziel@example.com'),
+(5, 'Parkowa', 'Nowy Dwor Mazowiecki', '52-161', '507', 'Antoni', 'antoni.szwaj@example.com'),
+(6, 'Boleslawa Chrobrego', 'Lodz', '45-586', '755', 'Tobiasz', 'tobiasz.piotrkowicz@example.com'),
+(7, 'Plater', 'Olawa', '29-601', '82', 'Elzbieta', 'elzbieta.prokopczuk@example.com'),
+(8, 'Borkowa', 'Mikolow', '53-443', '61/97', 'Apolonia', 'apolonia.komsta@example.com'),
+(9, 'Rubinowa', 'Bedzin', '21-088', '70', 'Jakub', 'jakub.grunt@example.com'),
+(10, 'Dluga', 'Warszawa', '00-001', '112', 'Natasza', 'natasza.kiciak@example.com'),
+(11, 'Olszynska', 'Gdansk', '80-001', '29', 'Szymon', 'szymon.ciepluch@example.com'),
+(12, 'Kwiatowa', 'Krakow', '30-002', '17', 'Karina', 'karina.subocz@example.com'),
+(13, 'Topolowa', 'Poznan', '60-003', '5', 'Tymoteusz', 'tymoteusz.buszkiewicz@example.com'),
+(14, 'Lesna', 'Wroclaw', '50-004', '8', 'Julita', 'julita.katana@example.com'),
+(15, 'Zielona', 'Szczecin', '70-005', '22', 'Tomasz', 'tomasz.barteczko@example.com'),
+(16, 'Biala', 'Katowice', '40-006', '11', 'Karol', 'karol.fornalik@example.com'),
+(17, 'Rozana', 'Bydgoszcz', '85-007', '14', 'Maksymilian', 'maksymilian.potoczny@example.com'),
+(18, 'Akacjowa', 'Lublin', '20-008', '33', 'Norbert', 'norbert.mijas@example.com'),
+(19, 'Slowianska', 'Bialystok', '15-009', '7', 'Ewelina', 'ewelina.bulak@example.com'),
+(20, 'Mickiewicza', 'Torun', '87-010', '21', 'Dariusz', 'dariusz.maserak@example.com');
 
-INSERT INTO Orders (order_id, order_date, order_status, order_price, delivery_option_id, address_id, customer_name, customer_surname)
+INSERT INTO Orders (order_id, order_date, order_status, order_price, delivery_option_id, address_id, customer_name, e_mail)
 VALUES
-(1, '2022-01-05', 'Forwarded for packaging', 51.98, 1, 1, 'Gaja', 'Pesta'),
-(2, '2022-02-10', 'Accepted', 15.49, 2, 2, 'Agnieszka', 'Gomula'),
-(3, '2022-03-15', 'Forwarded for packaging', 26.97, 4, 3, 'Franciszek', 'Bas'),
-(4, '2022-04-20', 'Waiting for payment', 39.5, 6, 4, 'Jedrzej', 'Drozdziel'),
-(5, '2022-05-25', 'Forwarded for packaging', 12.5, 3, 5, 'Antoni', 'Szwaj'),
-(6, '2022-06-30', 'Canceled', 61.98, 8, 6, 'Tobiasz', 'Piotrkowicz'),
-(7, '2022-07-05', 'Forwarded for packaging', 22.8, 5, 7, 'Elzbieta', 'Prokopczuk'),
-(8, '2022-08-10', 'Forwarded for packaging', 53.97, 7, 8, 'Apolonia', 'Komsta'),
-(9, '2022-09-15', 'Forwarded for packaging', 14.5, 8, 9, 'Jakub', 'Grunt'),
-(10, '2022-10-20', 'Forwarded for packaging', 19.98, 1, 10, 'Natasza', 'Kiciak'),
-(11, '2022-11-25', 'Accepted', 28, 6, 11, 'Szymon', 'Ciepluch'),
-(12, '2023-01-01', 'Canceled', 48.6, 6, 12, 'Karina', 'Subocz'),
-(13, '2023-01-05', 'Forwarded for packaging', 23.98, 2, 13, 'Tymoteusz', 'Buszkiewicz'),
-(14, '2023-02-10', 'Waiting for payment', 23.5, 7, 14, 'Julita', 'Katana'),
-(15, '2023-03-15', 'Forwarded for packaging', 39.9, 5, 15, 'Tomasz', 'Barteczko'),
-(16, '2023-04-20', 'Forwarded for packaging', 14.49, 4, 16, 'Karol', 'Fornalik'),
-(17, '2023-05-25', 'Forwarded for packaging', 27, 3, 17, 'Maksymilian', 'Potoczny'),
-(18, '2023-07-01', 'Returned', 25.3, 8, 18, 'Norbert', 'Mijas'),
-(19, '2023-07-15', 'Waiting for payment', 18.75, 2, 19, 'Ewelina', 'Bulak'),
-(20, '2023-08-20', 'Forwarded for packaging', 43.98, 3, 20, 'Dariusz', 'Maserak');
+(1, '2022-01-05', 'Forwarded for packaging', 51.98, 1, 1, 'Gaja', 'gaja.pesta@example.com'),
+(2, '2022-02-10', 'Accepted', 15.49, 2, 2, 'Agnieszka', 'agnieszka.gomula@example.com'),
+(3, '2022-03-15', 'Forwarded for packaging', 26.97, 4, 3, 'Franciszek', 'franciszek.bas@example.com'),
+(4, '2022-04-20', 'Waiting for payment', 39.5, 6, 4, 'Jedrzej', 'jedrzej.drozdziel@example.com'),
+(5, '2022-05-25', 'Forwarded for packaging', 12.5, 3, 5, 'Antoni', 'antoni.szwaj@example.com'),
+(6, '2022-06-30', 'Canceled', 61.98, 8, 6, 'Tobiasz', 'tobiasz.piotrkowicz@example.com'),
+(7, '2022-07-05', 'Forwarded for packaging', 22.8, 5, 7, 'Elzbieta', 'elzbieta.prokopczuk@example.com'),
+(8, '2022-08-10', 'Forwarded for packaging', 53.97, 7, 8, 'Apolonia', 'apolonia.komsta@example.com'),
+(9, '2022-09-15', 'Forwarded for packaging', 14.5, 8, 9, 'Jakub', 'jakub.grunt@example.com'),
+(10, '2022-10-20', 'Forwarded for packaging', 19.98, 1, 10, 'Natasza', 'natasza.kiciak@example.com'),
+(11, '2022-11-25', 'Accepted', 28, 6, 11, 'Szymon', 'szymon.ciepluch@example.com'),
+(12, '2023-01-01', 'Canceled', 48.6, 6, 12, 'Karina', 'karina.subocz@example.com'),
+(13, '2023-01-05', 'Forwarded for packaging', 23.98, 2, 13, 'Tymoteusz', 'tymoteusz.buszkiewicz@example.com'),
+(14, '2023-02-10', 'Waiting for payment', 23.5, 7, 14, 'Julita', 'julita.katana@example.com'),
+(15, '2023-03-15', 'Forwarded for packaging', 39.9, 5, 15, 'Tomasz', 'tomasz.barteczko@example.com'),
+(16, '2023-04-20', 'Forwarded for packaging', 14.49, 4, 16, 'Karol', 'karol.fornalik@example.com'),
+(17, '2023-05-25', 'Forwarded for packaging', 27, 3, 17, 'Maksymilian', 'maksymilian.potoczny@example.com'),
+(18, '2023-07-01', 'Returned', 25.3, 8, 18, 'Norbert', 'norbert.mijas@example.com'),
+(19, '2023-07-15', 'Waiting for payment', 18.75, 2, 19, 'Ewelina', 'ewelina.bulak@example.com'),
+(20, '2023-08-20', 'Forwarded for packaging', 43.98, 3, 20, 'Dariusz', 'dariusz.maserak@example.com');
 
 INSERT INTO Products_ordered (amount_id, amount, offer_id, order_id)
 VALUES
@@ -214,18 +217,18 @@ VALUES
 (9, 'Delivered', '2023-05-26', 11),
 (10, 'Delivered', '2023-08-22', 12);
 
-INSERT INTO Reviews (comment, rating, product_id, customer_name, customer_surname)
+INSERT INTO Reviews (comment, rating, product_id, customer_name, e_mail)
 VALUES
-('Great product!', 5, 5, 'Gaja', 'Pesta'),
-('Not satisfied.', 2, 12, 'Agnieszka', 'Gomula'),
-('Amazing quality!', 5, 20, 'Franciszek', 'Bas'),
-('Could be better.', 3, 3, 'Jedrzej', 'Drozdziel'),
-('Fast delivery!', NULL, 17, 'Antoni', 'Szwaj'),
-( NULL, 5, 9, 'Tobiasz', 'Piotrkowicz'),
-('Product as described.', 4, 6, 'Elzbieta', 'Prokopczuk'),
-(NULL, 4, 16, 'Apolonia', 'Komsta'),
-('Satisfied with the purchase.', NULL, 7, 'Jakub', 'Grunt'),
-('Excellent customer service!', 5, 11, 'Natasza', 'Kiciak');
+('Great product!', 5, 5, 'Gaja', 'gaja.pesta@example.com'),
+('Not satisfied.', 2, 12, 'Agnieszka', 'agnieszka.gomula@example.com'),
+('Amazing quality!', 5, 20, 'Franciszek', 'franciszek.bas@example.com'),
+('Could be better.', 3, 3, 'Jedrzej', 'jedrzej.drozdziel@example.com'),
+('Fast delivery!', NULL, 17, 'Antoni', 'antoni.szwaj@example.com'),
+( NULL, 5, 9, 'Tobiasz', 'tobiasz.piotrkowicz@example.com'),
+('Product as described.', 4, 6, 'Elzbieta', 'elzbieta.prokopczuk@example.com'),
+(NULL, 4, 16, 'Apolonia', 'apolonia.komsta@example.com'),
+('Satisfied with the purchase.', NULL, 7, 'Jakub', 'jakub.grunt@example.com'),
+('Excellent customer service!', 5, 11, 'Natasza', 'natasza.kiciak@example.com');
 
 INSERT INTO Transactions (transaction_id, total_price, payment_method, order_id)
 VALUES
