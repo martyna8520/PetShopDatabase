@@ -12,7 +12,7 @@ CREATE TABLE Products (
     category_name VARCHAR(30) NOT NULL,
     weight DECIMAL(6, 2) NOT NULL CHECK (weight >= 0.00),
     stock_level INT NOT NULL CHECK (stock_level >= 0),
-    producer_id INT,
+    producer_id INT NOT NULL,
     FOREIGN KEY (producer_id) REFERENCES Producers(producer_id)
 );
 
@@ -47,7 +47,7 @@ CREATE TABLE Addresses (
     house_number VARCHAR(10) NOT NULL, 
     customer_name VARCHAR(30) NOT NULL,
     e_mail VARCHAR(50)UNIQUE NOT NULL,
-    FOREIGN KEY (customer_name, e_mail) REFERENCES Customers(customer_name, e_mail) 
+    FOREIGN KEY (customer_name, e_mail) REFERENCES Customers(customer_name, e_mail)
 );
 
 CREATE TABLE Orders (
@@ -67,8 +67,8 @@ CREATE TABLE Orders (
 CREATE TABLE Products_ordered (
     amount_id INT NOT NULL PRIMARY KEY,
     amount INT NOT NULL CHECK (amount >= 0),
-    offer_id INT,
-    order_id INT,
+    offer_id INT NOT NULL,
+    order_id INT NOT NULL,
     FOREIGN KEY (offer_id) REFERENCES Offers(offer_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -84,10 +84,10 @@ CREATE TABLE Packages (
     package_id INT NOT NULL PRIMARY KEY,
     total_weight DECIMAL(6, 2) NOT NULL,
     package_status VARCHAR(50) NOT NULL CHECK (package_status IN ('In packing','Forwarded for shipment', 'Sent')),
-    order_id INT,
-    employee_id INT,
+    order_id INT NOT NULL,
+    employee_id INT NOT NULL,
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id) 
+    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id)
 );
 
 CREATE TABLE Package_parts (
