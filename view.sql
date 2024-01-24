@@ -13,7 +13,7 @@ SELECT * FROM Offers WHERE product_id = (SELECT product_id FROM Products WHERE p
 DELETE FROM Products
 WHERE product_name = 'Fish Tank Filter';
 
-SELECT * FROM Products WHERE product_name = 'Fish Tank Filter';;
+SELECT * FROM Products WHERE product_name = 'Fish Tank Filter';
 SELECT * FROM Offers WHERE product_id = (SELECT product_id FROM Products WHERE product_name = 'Fish Tank Filter');
 
 

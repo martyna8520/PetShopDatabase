@@ -35,27 +35,27 @@ INSERT INTO Products (product_id, product_name, category_name, weight, stock_lev
 (19, 'Puppy Training Pads', 'Dog Accessories', 0.20, 75, 1),
 (20, 'Hamster Wheel', 'Small Animal Accessories', 0.10, 25, 9);
 
-INSERT INTO Offers (date_from, date_to, price, product_id) VALUES
-('2022-01-01', '2022-01-15', 25.99, 5),
-('2022-02-01', '2022-02-15', 15.49, 12),
-('2022-02-06', '2022-03-03', 8.99, 20),
-('2022-04-01', '2022-04-15', 19.75, 3),
-('2022-05-01', '2022-05-17', 12.30, 17),
-('2022-06-15', '2022-06-30', 30.45, 9),
-('2022-07-01', '2022-07-14', 22.80, 6),
-('2022-08-17', '2022-08-29', 17.99, 16),
-('2022-09-01', '2022-09-18', 14.50, 7),
-('2022-10-01', '2022-10-15', 9.99, 11),
-('2022-11-01', '2022-11-19', 28.75, 1),
-('2022-12-21', '2023-01-07', 16.20, 19),
-('2023-01-01', '2023-01-10', 11.99, 10),
-('2023-02-01', '2023-02-15', 23.50, 8),
-('2023-03-16', '2023-03-30', 19.95, 13),
-('2023-04-01', '2023-04-12', 14.49, 14),
-('2023-05-01', '2023-05-15', 9.00, 18),
-('2023-06-25', '2023-07-10', 25.30, 2),
-('2023-07-01', '2023-07-20', 18.75, 15),
-('2023-08-01', '2023-08-15', 21.99, 4);
+INSERT INTO Offers (offer_id, date_from, date_to, price, product_id) VALUES
+(1, '2022-01-01', '2022-01-15', 25.99, 5),
+(2, '2022-02-01', '2022-02-15', 15.49, 12),
+(3, '2022-02-06', '2022-03-03', 8.99, 20),
+(4, '2022-04-01', '2022-04-15', 19.75, 3),
+(5, '2022-04-20', '2022-05-17', 12.30, 17),
+(6, '2022-06-15', '2022-06-30', 30.45, 9),
+(7, '2022-07-01', '2022-07-14', 22.80, 6),
+(8, '2022-08-17', '2022-08-29', 17.99, 16),
+(9, '2022-09-01', '2022-09-18', 14.50, 7),
+(10, '2022-10-01', '2022-10-15', 9.99, 11),
+(11, '2022-11-01', '2022-11-19', 28.75, 1),
+(12, '2022-12-21', '2023-01-07', 16.20, 19),
+(13, '2023-01-01', '2023-01-10', 11.99, 10),
+(14, '2023-02-01', '2023-02-15', 23.50, 8),
+(15, '2023-03-16', '2023-03-30', 19.95, 13),
+(16, '2023-04-01', '2023-06-12', 14.49, 14),
+(17, '2023-05-01', '2023-05-15', 9.00, 18),
+(18, '2023-06-25', '2023-07-10', 25.30, 2),
+(19, '2023-07-01', '2023-09-20', 18.75, 15),
+(20, '2023-08-01', '2023-08-15', 21.99, 4);
 
 INSERT INTO Delivery_options (delivery_option_id, delivery_cost, delivery_type) VALUES
 (1, 9.99, 'Courier DHL card payment'),
@@ -121,7 +121,7 @@ VALUES
 (2, '2022-02-10', 'Accepted', 15.49, 2, 2, 'Agnieszka', 'agnieszka.gomula@example.com'),
 (3, '2022-03-15', 'Forwarded for packaging', 26.97, 4, 3, 'Franciszek', 'franciszek.bas@example.com'),
 (4, '2022-04-20', 'Waiting for payment', 39.5, 6, 4, 'Jedrzej', 'jedrzej.drozdziel@example.com'),
-(5, '2022-05-25', 'Forwarded for packaging', 12.5, 3, 5, 'Antoni', 'antoni.szwaj@example.com'),
+(5, '2022-04-25', 'Forwarded for packaging', 12.5, 3, 5, 'Antoni', 'antoni.szwaj@example.com'),
 (6, '2022-06-30', 'Canceled', 61.98, 8, 6, 'Tobiasz', 'tobiasz.piotrkowicz@example.com'),
 (7, '2022-07-05', 'Forwarded for packaging', 22.8, 5, 7, 'Elzbieta', 'elzbieta.prokopczuk@example.com'),
 (8, '2022-08-10', 'Forwarded for packaging', 53.97, 7, 8, 'Apolonia', 'apolonia.komsta@example.com'),
@@ -133,10 +133,10 @@ VALUES
 (14, '2023-02-10', 'Waiting for payment', 23.5, 7, 14, 'Julita', 'julita.katana@example.com'),
 (15, '2023-03-15', 'Forwarded for packaging', 39.9, 5, 15, 'Tomasz', 'tomasz.barteczko@example.com'),
 (16, '2023-04-20', 'Forwarded for packaging', 14.49, 4, 16, 'Karol', 'karol.fornalik@example.com'),
-(17, '2023-05-25', 'Forwarded for packaging', 27, 3, 17, 'Maksymilian', 'maksymilian.potoczny@example.com'),
+(17, '2023-05-25', 'Forwarded for packaging', 43.47, 3, 17, 'Maksymilian', 'maksymilian.potoczny@example.com'),
 (18, '2023-07-01', 'Returned', 25.3, 8, 18, 'Norbert', 'norbert.mijas@example.com'),
 (19, '2023-07-15', 'Waiting for payment', 18.75, 2, 19, 'Ewelina', 'ewelina.bulak@example.com'),
-(20, '2023-08-20', 'Forwarded for packaging', 43.98, 3, 20, 'Dariusz', 'dariusz.maserak@example.com');
+(20, '2023-08-20', 'Forwarded for packaging', 37.5, 3, 20, 'Dariusz', 'dariusz.maserak@example.com');
 
 INSERT INTO Products_ordered (amount_id, amount, offer_id, order_id)
 VALUES
@@ -156,10 +156,10 @@ VALUES
 (14, 1, 14, 14),
 (15, 2, 15, 15),
 (16, 1, 16, 16),
-(17, 3, 17, 17),
+(17, 3, 16, 17),
 (18, 2, 18, 18),
 (19, 1, 19, 19),
-(20, 2, 20, 20);
+(20, 2, 19, 20);
 
 INSERT INTO Employees (employee_id, employee_name, employee_surname, position)
 VALUES
@@ -178,22 +178,22 @@ INSERT INTO Packages (package_id, total_weight, package_status, order_id, employ
 VALUES
 (1, 10.00, 'In packing', 1, 3),
 (2, 0.30, 'Forwarded for shipment', 3, 9),
-(3, 1.80, 'Sent', 5, 4),
+(3, 1.80, 'Sent', 5, 3),
 (4, 4.00, 'In packing', 7, 4),
 (5, 6.00, 'Forwarded for shipment', 8, 3),
 (6, 2.00, 'Sent', 9, 9),
-(7, 5.00, 'Forwarded for shipment', 10, 9),
+(7, 5.00, 'Forwarded for shipment', 10, 3),
 (8, 2.00, 'Sent', 13, 4),
 (9, 0.50, 'Sent', 15, 3),
 (10, 0.75, 'Forwarded for shipment', 16, 3),
-(11, 1.20, 'Sent', 17, 4),
-(12, 1.00, 'Sent', 20, 9);
+(11, 2.25, 'Sent', 17, 4),
+(12, 1.5, 'Sent', 20, 9);
 
 INSERT INTO Package_parts (package_part_id, shipped_date, amount_id, package_id)
 VALUES
 (1, '2022-01-05', 1, 1),
 (2, '2022-03-15', 3, 2),
-(3, '2022-05-25', 5, 3),
+(3, '2022-05-10', 5, 3),
 (4, '2022-07-05', 7, 4),
 (5, '2022-08-10', 8, 5),
 (6, '2022-09-15', 9, 6),
@@ -207,7 +207,7 @@ VALUES
 INSERT INTO Deliveries (delivery_id, delivery_status, delivery_date, package_id)
 VALUES
 (1, 'Waiting to be picked up by the courier', '2022-03-15', 2),
-(2, 'During delivery', '2022-05-26', 3),
+(2, 'During delivery', '2022-05-15', 3),
 (3, 'Waiting to be picked up by the courier', '2022-08-10', 5),
 (4, 'During delivery', '2022-09-16', 6),
 (5, 'Waiting to be picked up by the courier', '2022-10-20', 7),
@@ -244,5 +244,5 @@ VALUES
 (10, 35.98, 'cash', 13),
 (11, 48.90, 'card', 15),
 (12, 22.99, 'cash', 16),
-(13, 39.00, 'cash', 17),
-(14, 53.98, 'card', 20);
+(13, 53.47, 'cash', 17),
+(14, 47.5, 'card', 20);

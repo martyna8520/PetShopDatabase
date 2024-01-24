@@ -17,7 +17,7 @@ CREATE TABLE Products (
 );
 
 CREATE TABLE Offers (
-    offer_id INT PRIMARY KEY IDENTITY(1,1),
+    offer_id INT NOT NULL PRIMARY KEY,
     date_from DATE NOT NULL CHECK (date_from >= '2021-12-01'),
     date_to DATE NOT NULL CHECK (date_to >= '2021-12-01'),
     price DECIMAL(6, 2) NOT NULL,
@@ -55,8 +55,8 @@ CREATE TABLE Orders (
     order_date DATE NOT NULL CHECK (order_date >= '2021-12-01'),
     order_status VARCHAR(50) NOT NULL CHECK (order_status IN ('Accepted', 'Canceled', 'Returned','Waiting for payment', 'Forwarded for packaging' )),
     order_price DECIMAL(6, 2) NOT NULL,
-    delivery_option_id INT,
-    address_id INT,
+    delivery_option_id INT NOT NULL,
+    address_id INT NOT NULL,
     customer_name VARCHAR(30) NOT NULL,
     e_mail VARCHAR(50)UNIQUE NOT NULL,
     FOREIGN KEY (customer_name, e_mail) REFERENCES Customers(customer_name, e_mail),
@@ -93,8 +93,8 @@ CREATE TABLE Packages (
 CREATE TABLE Package_parts (
     package_part_id INT NOT NULL PRIMARY KEY,
     shipped_date DATE NOT NULL CHECK (shipped_date >= '2021-12-01'),
-    amount_id INT,
-    package_id INT,
+    amount_id INT NOT NULL,
+    package_id INT NOT NULL,
     FOREIGN KEY (amount_id) REFERENCES Products_ordered(amount_id)ON DELETE CASCADE ON UPDATE CASCADE, 
     FOREIGN KEY (package_id) REFERENCES Packages(package_id)
 );
@@ -103,7 +103,7 @@ CREATE TABLE Deliveries (
     delivery_id INT NOT NULL PRIMARY KEY,
     delivery_status VARCHAR(50) NOT NULL CHECK (delivery_status IN ('During delivery', 'Delivered','Waiting to be picked up by the courier')),
     delivery_date DATE NOT NULL CHECK (delivery_date >= '2021-12-01'),
-    package_id INT,
+    package_id INT NOT NULL,
     FOREIGN KEY (package_id) REFERENCES Packages(package_id)
 );
 
@@ -111,8 +111,8 @@ CREATE TABLE Reviews (
     review_id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     comment VARCHAR(255),
     rating INT CHECK (rating >= 1 AND rating <= 5),
-    product_id INT,
-    customer_name VARCHAR(30),
+    product_id INT NOT NULL,
+    customer_name VARCHAR(30) NOT NULL,
     e_mail VARCHAR(50) UNIQUE NOT NULL,
     FOREIGN KEY (product_id) REFERENCES Products(product_id),
     FOREIGN KEY (customer_name, e_mail) REFERENCES Customers(customer_name, e_mail),
@@ -123,7 +123,7 @@ CREATE TABLE Transactions (
     transaction_id INT NOT NULL PRIMARY KEY,
     total_price DECIMAL(6, 2) NOT NULL,
     payment_method VARCHAR(20) NOT NULL CHECK(payment_method IN ('card', 'cash')) ,
-    order_id INT,
+    order_id INT NOT NULL,
     FOREIGN KEY (order_id) REFERENCES Orders(order_id)
 );
 
